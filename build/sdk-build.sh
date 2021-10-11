@@ -13,7 +13,7 @@ if [[ "$?" != "0" ]]; then
     exit $?
 fi
 
-make package/smartdns/compile V=s PKG_VERSION="$PKG_VERSION" PKG_SOURCE_VERSION="$PKG_SOURCE_VERSION" PKG_MIRROR_HASH="$PKG_MIRROR_HASH"
+make package/smartdns/compile V=s
 if [[ "$?" != "0" ]]; then
     exit $?
 fi
