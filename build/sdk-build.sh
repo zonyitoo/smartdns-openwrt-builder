@@ -2,6 +2,7 @@
 
 cd /home/build/openwrt
 
+sudo chown -R build:build ./bin
 ls -alh ./bin
 
 echo 'BUILD START'
