@@ -1,5 +1,4 @@
 name: Build SmartDNS Release
-
 on:
   push:
     branches:
@@ -14,8 +13,9 @@ jobs:
   build-docker:
     runs-on: ubuntu-latest
     strategy:
-      openwrt-sdk:
-        - rockchip-armv8-21.02-SNAPSHOT
+      matrix:
+        openwrt-sdk:
+          - rockchip-armv8-21.02-SNAPSHOT
 
     steps:
       - uses: actions/checkout@v2
