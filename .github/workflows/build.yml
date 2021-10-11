@@ -1,0 +1,37 @@
+name: Build SmartDNS Release
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  PKG_VERSION: 1.2021.08.27-1923
+  PKG_SOURCE_VERSION: f50e4dd0813da9300580f7188e44ed72a27ae79c
+  PKG_MIRROR_HASH: skip
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    strategy:
+      openwrt-sdk:
+        - rockchip-armv8-21.02-SNAPSHOT
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build SmartDNS
+        run: |
+          docker run -v "$PWD/build/bin:/home/build/openwrt/bin" \
+                     -v "$PWD/build/sdk-build.sh:/home/build/openwrt/sdk-build.sh" \
+                     -v "$PWD/smartdns/package/openwrt:/home/build/openwrt/package/smartdns" \
+                     -e PKG_VERSION="$PKG_VERSION" \
+                     -e PKG_SOURCE_VERSION="$PKG_SOURCE_VERSION" \
+                     -e PKG_MIRROR_HASH="$PKG_MIRROR_HASH" \
+                    openwrtorg/sdk:${{ matrix.openwrt-sdk }} /bin/bash /home/build/openwrt/sdk-build.sh
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.openwrt-sdk }}
+          path: build-bin/**/smartdns_*.ipk
