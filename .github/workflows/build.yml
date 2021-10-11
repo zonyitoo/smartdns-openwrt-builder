@@ -25,9 +25,9 @@ jobs:
       - name: Replace Version
         run: |
           cd smartdns/package/openwrt
-          sed "s/PKG_VERSION.*/PKG_VERSION:=$PKG_VERSION" Makefile
-          sed "s/PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:=$PKG_SOURCE_VERSION" Makefile
-          sed "s/PKG_MIRROR_HASH.*/PKG_MIRROR_HASH:=" Makefile
+          sed "s/PKG_VERSION.*/PKG_VERSION:=$PKG_VERSION/g" Makefile
+          sed "s/PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:=$PKG_SOURCE_VERSION/g" Makefile
+          sed "s/PKG_MIRROR_HASH.*/PKG_MIRROR_HASH:=/g" Makefile
           cat Makefile
 
       - name: Build SmartDNS
