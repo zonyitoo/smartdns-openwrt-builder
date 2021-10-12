@@ -41,8 +41,17 @@ jobs:
                      -v "$PWD/smartdns/package/openwrt:/home/build/openwrt/package/smartdns" \
                     openwrtorg/sdk:${{ matrix.openwrt-sdk }} /bin/bash /home/build/openwrt/sdk-build.sh
 
+      - name: Find Package
+        id: find_package
+        run: |
+          ipk_path=`find build/bin -name 'smartdns_*.ipk`
+          if [[ -z "$ipk_path" ]]; then
+            echo "::error title=Find IPK::Couldn't find smartdns ipk"
+            exit 1
+          fi
+          echo "::set-output name=ipk_path::$ipk_path"
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.openwrt-sdk }}
-          path: build/bin/packages/**/smartdns_*.ipk
+          path: ${{ steps.find_package.outputs.ipk_path }}
