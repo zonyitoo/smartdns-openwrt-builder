@@ -11,5 +11,3 @@ This project is for building OpenWRT Release for SmartDNS.
 1. Open [Build SmartDNS Release Workflow](https://github.com/zonyitoo/smartdns-openwrt-builder/actions/workflows/build.yml) in [Actions](https://github.com/zonyitoo/smartdns-openwrt-builder/actions)
 
 2. Click **Run workflow**
-
-3. Input `version` and `source_version`

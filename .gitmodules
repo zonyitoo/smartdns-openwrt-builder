@@ -1,3 +1,0 @@
-[submodule "smartdns"]
-	path = smartdns
-	url = git@github.com:pymumu/smartdns.git
