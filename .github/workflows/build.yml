@@ -34,8 +34,10 @@ jobs:
             exit 1
           fi
           echo "::set-output name=ipk_path::$ipk_path"
+          echo "::set-output name=ipk_name::$(basename $ipk_path)"
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
+          name: ${{ steps.find_package.outputs.ipk_name }}
           path: ${{ steps.find_package.outputs.ipk_path }}
